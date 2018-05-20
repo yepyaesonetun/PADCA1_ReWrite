@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.primeyz.padca1_rewrite"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+ext {
+    SUPPORT_LIBRARY_VERSION = '27.1.1'
+    CONSTRAINT_LAYOUT_VERSION = '1.1.0'
+    VECTOR_DRAWABLE_VERSION = '21.1.1'
+    GLIDE_VERSION = '4.6.1'
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support.constraint:constraint-layout:$CONSTRAINT_LAYOUT_VERSION"
+    implementation "com.android.support:support-vector-drawable:$VECTOR_DRAWABLE_VERSION"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_LIBRARY_VERSION"
+    implementation "com.android.support:cardview-v7:$SUPPORT_LIBRARY_VERSION"
+
+    /** Glide Image Loading **/
+    implementation "com.github.bumptech.glide:glide:$GLIDE_VERSION"
+    annotationProcessor "com.github.bumptech.glide:compiler:$GLIDE_VERSION"
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}

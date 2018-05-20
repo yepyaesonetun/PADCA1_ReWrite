@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#373F4E</color>
+    <color name="colorPrimaryDark">#212837</color>
+    <color name="colorAccent">#7DC7CA</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorSlightlyWhite">#c2c2c2</color>
+    <color name="colorTextSecondary">#7A7E87</color>
+
+    <color name="headGradientStart">#66707070</color>
+    <color name="headGradientCenter">#00eaeaea</color>
+    <color name="headGradientEnd">#96000000</color>
+</resources>

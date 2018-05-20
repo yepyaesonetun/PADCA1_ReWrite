@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PADCA1_ReWrite</string>
+    <string name="frag_series_title">Series</string>
+    <string name="title_a_healthy_mind">A Healthy Mind</string>
+    <string name="title_new_on_simple_habit">New on Simple Habit</string>
+    <string name="title_all_topic">All Topic</string>
+    <string name="title_most_popular">Most Popular</string>
+    <string name="descpt_imageview_for_topic_icon">ImageView for Topic Icon</string>
+    <string name="title_my_playlist">My PlayList</string>
+</resources>
