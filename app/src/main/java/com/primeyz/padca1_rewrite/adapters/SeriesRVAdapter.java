@@ -9,10 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.primeyz.padca1_rewrite.R;
+import com.primeyz.padca1_rewrite.data.vo.BaseVO;
+import com.primeyz.padca1_rewrite.data.vo.CurrentProgramVO;
+import com.primeyz.padca1_rewrite.viewholders.BaseViewHolder;
+import com.primeyz.padca1_rewrite.viewholders.CurrentProgramViewHolder;
 import com.primeyz.padca1_rewrite.viewholders.SeriesViewHolder;
 
 
-public class SeriesRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SeriesRVAdapter extends BaseRecyclerAdapter<BaseViewHolder,BaseVO> {
 
     private final static int VT_HEADER = 0;
     private final static int VT_SERIES = 1;
@@ -22,37 +26,60 @@ public class SeriesRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private Context mContext;
 
     public SeriesRVAdapter(Context context) {
-        mLayoutInflater = LayoutInflater.from(context);
-        mContext = context;
+        super(context);
     }
+
+//    public SeriesRVAdapter(Context context) {
+//        mLayoutInflater = LayoutInflater.from(context);
+//        mContext = context;
+//    }
+
+//    @NonNull
+//    @Override
+//    public SeriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        int layoutRes = 0;
+//        switch (viewType) {
+//            case VT_HEADER:
+//                layoutRes = R.layout.current_program;
+//                break;
+//            case VT_SERIES:
+//                layoutRes = R.layout.item_view_series;
+//                break;
+//            case VT_TOPIC:
+//                layoutRes = R.layout.item_view_topic;
+//                break;
+//        }
+//        View view = mLayoutInflater.inflate(layoutRes, parent, false);
+//
+//        return new SeriesViewHolder(view);
+//    }
 
     @NonNull
     @Override
-    public SeriesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         int layoutRes = 0;
         switch (viewType) {
             case VT_HEADER:
-                layoutRes = R.layout.content_series_recomanded;
-                break;
+                return new CurrentProgramViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.current_program, parent,false));
             case VT_SERIES:
-                layoutRes = R.layout.item_view_series;
-                break;
+                return new CurrentProgramViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.current_program, parent,false));
             case VT_TOPIC:
-                layoutRes = R.layout.item_view_topic;
-                break;
+                return new CurrentProgramViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.current_program, parent,false));
         }
-        View view = mLayoutInflater.inflate(layoutRes, parent, false);
-
-        return new SeriesViewHolder(view);
+        return new CurrentProgramViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.current_program, parent,false));
     }
+
+
 
     @Override
     public int getItemViewType(int position) {
 
-        // playing with position
-        if ((position > 1 && position / 2 == 3)) {
-            position = 1;
-        }
+//        // playing with position
+//        if ((position > 1 && position / 2 == 3)) {
+//            position = 1;
+//        }
+//        // playing with position
+
         switch (position) {
             case 0:
                 return VT_HEADER;
@@ -65,20 +92,20 @@ public class SeriesRVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
-        SeriesViewHolder seriesViewHolder;
-        if (holder.getItemViewType() == 1) {
-            seriesViewHolder = (SeriesViewHolder) holder;
-            seriesViewHolder.rvTopic.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
-            ItemCardRVAdapter topicAdapter = new ItemCardRVAdapter(mContext);
-            seriesViewHolder.rvTopic.setAdapter(topicAdapter);
-        }
-    }
+//    @Override
+//    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+//
+//        SeriesViewHolder seriesViewHolder;
+//        if (holder.getItemViewType() == 1) {
+//            seriesViewHolder = (SeriesViewHolder) holder;
+//            seriesViewHolder.rvTopic.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
+//            ItemCardRVAdapter topicAdapter = new ItemCardRVAdapter(mContext);
+//            seriesViewHolder.rvTopic.setAdapter(topicAdapter);
+//        }
+//    }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return 0;
     }
 }

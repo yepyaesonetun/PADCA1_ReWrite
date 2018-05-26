@@ -27,6 +27,11 @@ ext {
     CONSTRAINT_LAYOUT_VERSION = '1.1.0'
     VECTOR_DRAWABLE_VERSION = '21.1.1'
     GLIDE_VERSION = '4.6.1'
+    BUTTER_KNIFE_VERSION = '8.8.1'
+    EVENT_BUS_VERSION = '3.1.1'
+    GSON_VERSION = '2.8.2'
+    RETROFIT_VERSION = '2.3.0'
+    BOTTOM_NAVIGATION = '2.0.4'
 }
 
 dependencies {
@@ -40,7 +45,23 @@ dependencies {
 
     /** Glide Image Loading **/
     implementation "com.github.bumptech.glide:glide:$GLIDE_VERSION"
+    implementation 'com.android.support:support-v4:27.1.1'
     annotationProcessor "com.github.bumptech.glide:compiler:$GLIDE_VERSION"
+
+    /** ButterKnife **/
+    compile "com.jakewharton:butterknife:$BUTTER_KNIFE_VERSION"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$BUTTER_KNIFE_VERSION"
+
+    /** GreenRobot EventBus **/
+    compile "org.greenrobot:eventbus:$EVENT_BUS_VERSION"
+
+    /** Bottom Navigation **/
+    implementation "com.ashokvarma.android:bottom-navigation-bar:$BOTTOM_NAVIGATION"
+
+    /** Retrofit and NetworkLoading **/
+    compile "com.google.code.gson:gson:$GSON_VERSION"
+    compile "com.squareup.retrofit2:retrofit:$RETROFIT_VERSION"
+    compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

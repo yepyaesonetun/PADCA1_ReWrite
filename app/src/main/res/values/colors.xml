@@ -10,4 +10,19 @@
     <color name="headGradientStart">#66707070</color>
     <color name="headGradientCenter">#00eaeaea</color>
     <color name="headGradientEnd">#96000000</color>
+
+    <color name="white_full">#fff</color>
+    <color name="black_full">#000</color>
+
+    <color name="colorBottomNavigationInActive">#AFAFAF</color>
+    <color name="colorBottomNavigationActive">@color/colorAccent</color>
+
+    <color name="colorSelectState">#39b1b1b1</color>
+    <color name="colorSearchBackground">#f2f6ff</color>
+
+    <color name="colorPurple">#7e5de9</color>
+    <color name="colorTeal">#4fc2b1</color>
+    <color name="colorSpace">#5b81da</color>
+    <color name="premiumColor">#9f4761</color>
+
 </resources>
