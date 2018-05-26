@@ -16,6 +16,7 @@
     <dimen name="margin_large">16dp</dimen>
     <dimen name="margin_medium_large">24dp</dimen>
     <dimen name="margin_ex_large">32dp</dimen>
+    <dimen name="margin_xxlarge">48dp</dimen>
 
     <dimen name="text_regular_2x">16sp</dimen>
 </resources>

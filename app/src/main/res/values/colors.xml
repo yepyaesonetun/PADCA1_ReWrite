@@ -14,7 +14,7 @@
     <color name="white_full">#fff</color>
     <color name="black_full">#000</color>
 
-    <color name="colorBottomNavigationInActive">#AFAFAF</color>
+    <color name="colorBottomNavigationInActive">#706f6f</color>
     <color name="colorBottomNavigationActive">@color/colorAccent</color>
 
     <color name="colorSelectState">#39b1b1b1</color>

@@ -5,6 +5,9 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -18,6 +21,10 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.zip.Inflater;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener{
 
@@ -30,10 +37,17 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private ArrayList<String> fragmentTags;
     private Handler mHandler;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        setSupportActionBar(toolbar);
+
 //        TabLayout tabLayout = findViewById(R.id.sliding_tabs);
 //        ViewPager viewPager = findViewById(R.id.view_pager);
 //
@@ -60,12 +74,18 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         bottomNavigationBar.selectTab(0, false);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main,menu);
+        return true;
+    }
+
     private void setupBottomNavBar() {
-        BottomNavigationItem navHome = new BottomNavigationItem(R.drawable.ic_play_arrow_white_24dp, "Meditate");
+        BottomNavigationItem navHome = new BottomNavigationItem(R.drawable.ic_nav_home_icon, "Meditate");
 
-        BottomNavigationItem navWishList = new BottomNavigationItem(R.drawable.ic_heart, "Me");
+        BottomNavigationItem navWishList = new BottomNavigationItem(R.drawable.ic_nav_person_24dp, "Me");
 
-        BottomNavigationItem navMyCart = new BottomNavigationItem(R.drawable.ic_flame, "More");
+        BottomNavigationItem navMyCart = new BottomNavigationItem(R.drawable.ic_nav_more_icon, "More");
 
         bottomNavigationBar.setTabSelectedListener(this);
 
