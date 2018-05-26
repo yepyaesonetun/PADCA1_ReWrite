@@ -7,23 +7,14 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.primeyz.padca1_rewrite.R;
-import com.primeyz.padca1_rewrite.adapters.AllTopicsAdapter;
-import com.primeyz.padca1_rewrite.adapters.EveningMeditationsAdapter;
-import com.primeyz.padca1_rewrite.adapters.HealthyMindAdapter;
 import com.primeyz.padca1_rewrite.adapters.SeriesRVAdapter;
-import com.primeyz.padca1_rewrite.components.EmptyViewPod;
-import com.primeyz.padca1_rewrite.data.model.SeriesModal;
 import com.primeyz.padca1_rewrite.data.vo.BaseVO;
 import com.primeyz.padca1_rewrite.data.vo.CategoryVO;
-import com.primeyz.padca1_rewrite.data.vo.ProgramVO;
 import com.primeyz.padca1_rewrite.data.vo.TopicVO;
 import com.primeyz.padca1_rewrite.events.RestApiEvent;
 

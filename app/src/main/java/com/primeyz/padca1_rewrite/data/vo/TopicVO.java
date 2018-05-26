@@ -1,6 +1,5 @@
 package com.primeyz.padca1_rewrite.data.vo;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
