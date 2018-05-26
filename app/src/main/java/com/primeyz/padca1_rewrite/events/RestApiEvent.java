@@ -1,5 +1,6 @@
 package com.primeyz.padca1_rewrite.events;
 
+import com.primeyz.padca1_rewrite.data.vo.BaseVO;
 import com.primeyz.padca1_rewrite.data.vo.CategoryVO;
 import com.primeyz.padca1_rewrite.data.vo.CurrentProgramVO;
 import com.primeyz.padca1_rewrite.data.vo.TopicVO;
@@ -54,6 +55,19 @@ public class RestApiEvent {
 
         public List<TopicVO> getLoadTopics() {
             return loadTopics;
+        }
+    }
+
+    public static class DataReadyEvent{
+        private List<BaseVO> baseVOList;
+
+
+        public DataReadyEvent(List<BaseVO> baseVOList) {
+            this.baseVOList = baseVOList;
+        }
+
+        public List<BaseVO> getAllList(){
+            return baseVOList;
         }
     }
 }

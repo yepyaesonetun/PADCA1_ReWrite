@@ -8,7 +8,7 @@ import java.util.List;
  * Created by yepyaesonetun on 5/26/18.
  **/
 
-public class CurrentProgramVO extends BaseVO{
+public class CurrentProgramVO implements BaseVO{
 
     @SerializedName("program-id")
     private String programId;

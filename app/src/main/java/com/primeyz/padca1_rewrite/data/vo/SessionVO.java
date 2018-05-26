@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by yepyaesonetun on 5/25/18.
  **/
 
-public class SessionVO extends BaseVO{
+public class SessionVO implements BaseVO{
 
     @SerializedName("session-id")
     private String sessionId;

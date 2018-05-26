@@ -8,7 +8,7 @@ import java.util.List;
  * Created by yepyaesonetun on 5/25/18.
  **/
 
-public class ProgramVO {
+public class ProgramVO{
     @SerializedName("program-id")
     public String programId;
 

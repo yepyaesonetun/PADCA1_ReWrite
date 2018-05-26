@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by yepyaesonetun on 5/25/18.
  **/
 
-public class TopicVO extends BaseVO{
+public class TopicVO implements BaseVO{
 
     @SerializedName("topic-name")
     private String topicName;

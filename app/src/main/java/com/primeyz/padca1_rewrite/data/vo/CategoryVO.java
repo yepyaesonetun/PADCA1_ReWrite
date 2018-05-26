@@ -8,7 +8,7 @@ import java.util.List;
  * Created by yepyaesonetun on 5/26/18.
  **/
 
-public class CategoryVO extends BaseVO{
+public class CategoryVO implements BaseVO{
     @SerializedName("category-id")
     private String categoryId;
     private String title;

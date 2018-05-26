@@ -7,19 +7,28 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.primeyz.padca1_rewrite.R;
+import com.primeyz.padca1_rewrite.data.vo.ProgramVO;
+import com.primeyz.padca1_rewrite.viewholders.BaseViewHolder;
 import com.primeyz.padca1_rewrite.viewholders.EveningMeditationViewHolder;
 
+import butterknife.ButterKnife;
 
-public class EveningMeditationsAdapter extends BaseRecyclerAdapter {
 
-    public EveningMeditationsAdapter(Context context) {
-        super(context);
+public class EveningMeditationsAdapter extends BaseViewHolder<ProgramVO> {
+
+
+    public EveningMeditationsAdapter(View itemView) {
+        super(itemView);
+        ButterKnife.bind(this,itemView);
     }
 
-    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View eveningItemView = mLayoutInflator.inflate(R.layout.item_view_card, parent, false);
-        return new EveningMeditationViewHolder(eveningItemView);
+    public void setData(ProgramVO data) {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

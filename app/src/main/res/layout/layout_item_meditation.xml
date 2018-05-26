@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/meditation_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_large"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="@dimen/badge_text_size"
+        android:text="Morning Meditation"
+        android:textStyle="bold" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/meditationview_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:layout_below="@+id/meditation_title"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>
