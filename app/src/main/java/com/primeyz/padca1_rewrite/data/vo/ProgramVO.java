@@ -24,8 +24,9 @@ public class ProgramVO{
     @SerializedName("description")
     public String description;
 
-    @SerializedName("sessions")
     public List<SessionVO> sessions;
+
+
 
     public String getProgramId() {
         return programId;

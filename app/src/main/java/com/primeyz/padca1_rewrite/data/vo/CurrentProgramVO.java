@@ -12,13 +12,19 @@ public class CurrentProgramVO implements BaseVO{
 
     @SerializedName("program-id")
     private String programId;
+
+    @SerializedName("title")
     private String title;
     @SerializedName("current-period")
     private String currentPeriod;
+    @SerializedName("background")
     private String background;
+    @SerializedName("description")
     private String description;
     @SerializedName("average-lengths")
     private List<Integer> averageLengths;
+    @SerializedName("sessions")
+    private List<SessionVO> sessionVOList;
 
     public String getProgramId() {
         return programId;
@@ -66,5 +72,13 @@ public class CurrentProgramVO implements BaseVO{
 
     public void setAverageLengths(List<Integer> averageLengths) {
         this.averageLengths = averageLengths;
+    }
+
+    public List<SessionVO> getSessionVOList() {
+        return sessionVOList;
+    }
+
+    public void setSessionVOList(List<SessionVO> sessionVOList) {
+        this.sessionVOList = sessionVOList;
     }
 }

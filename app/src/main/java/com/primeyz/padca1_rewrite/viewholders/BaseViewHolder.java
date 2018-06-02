@@ -11,13 +11,14 @@ import butterknife.ButterKnife;
 
 public abstract class BaseViewHolder<W> extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    private W mData;
+    public W mData;
+    private int position;
 
     public BaseViewHolder(View itemView) {
         super(itemView);
-        ButterKnife.bind(this, itemView);
+
         itemView.setOnClickListener(this);
     }
 
-    public abstract void setData(W data);
+    public abstract void setData(W data, int position);
 }

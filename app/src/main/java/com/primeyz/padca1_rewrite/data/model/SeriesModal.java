@@ -3,6 +3,7 @@ package com.primeyz.padca1_rewrite.data.model;
 import com.primeyz.padca1_rewrite.data.vo.BaseVO;
 import com.primeyz.padca1_rewrite.data.vo.CategoryVO;
 import com.primeyz.padca1_rewrite.data.vo.CurrentProgramVO;
+import com.primeyz.padca1_rewrite.data.vo.ProgramVO;
 import com.primeyz.padca1_rewrite.data.vo.TopicVO;
 import com.primeyz.padca1_rewrite.events.RestApiEvent;
 import com.primeyz.padca1_rewrite.network.SimpleHabitsDataAgentImpl;
@@ -22,6 +23,8 @@ import static com.primeyz.padca1_rewrite.utils.AppConstants.ACCESS_TOKEN;
 
 public class SeriesModal {
     private static SeriesModal objInstance;
+    public static CurrentProgramVO mCurrentProgramVO = new CurrentProgramVO();
+    public static List<CategoryVO> mCategories;
 
     private int mPageIndex = 1;
 
@@ -46,6 +49,7 @@ public class SeriesModal {
     public void onCurrentProgramDataLoaded(RestApiEvent.currentProgramDataLoadedEvent event) {
         list.add(event.getLoadedCurrentProgram());
         SimpleHabitsDataAgentImpl.getNewInstance().loadCategories(ACCESS_TOKEN, mPageIndex);
+        mCurrentProgramVO = event.getLoadedCurrentProgram();
     }
 
     @Subscribe
@@ -54,6 +58,7 @@ public class SeriesModal {
             list.add(categoryVO);
         }
         SimpleHabitsDataAgentImpl.getNewInstance().loadTopic(ACCESS_TOKEN, mPageIndex);
+        mCategories = event.getLoadCategories();
     }
 
     @Subscribe
@@ -64,5 +69,16 @@ public class SeriesModal {
         EventBus.getDefault().post(dataReadyEvent);
     }
 
+
+    public ProgramVO getProgramId(String id) {
+        for (CategoryVO categoriesVO : mCategories) {
+            for (ProgramVO programsVO : categoriesVO.getPrograms()) {
+                if (programsVO.getProgramId().equalsIgnoreCase(id)) {
+                    return programsVO;
+                }
+            }
+        }
+        return new ProgramVO();
+    }
 
 }

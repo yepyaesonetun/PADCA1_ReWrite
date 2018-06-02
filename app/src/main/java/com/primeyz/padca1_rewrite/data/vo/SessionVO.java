@@ -10,13 +10,9 @@ public class SessionVO implements BaseVO{
 
     @SerializedName("session-id")
     private String sessionId;
-
-    @SerializedName("title")
     private String title;
-
     @SerializedName("length-in-seconds")
-    private Integer lengthInSeconds;
-
+    private int lengthInSeconds;
     @SerializedName("file-path")
     private String filePath;
 
@@ -36,11 +32,11 @@ public class SessionVO implements BaseVO{
         this.title = title;
     }
 
-    public Integer getLengthInSeconds() {
+    public int getLengthInSeconds() {
         return lengthInSeconds;
     }
 
-    public void setLengthInSeconds(Integer lengthInSeconds) {
+    public void setLengthInSeconds(int lengthInSeconds) {
         this.lengthInSeconds = lengthInSeconds;
     }
 

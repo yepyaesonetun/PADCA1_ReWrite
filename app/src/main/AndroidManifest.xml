@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.primeyz.padca1_rewrite">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".root.PADCA1App"
@@ -19,6 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.ProgramDetailActivity"
+            android:label="@string/title_activity_pro_detail"
+            android:theme="@style/TranspantTheme"/>
     </application>
 
 </manifest>

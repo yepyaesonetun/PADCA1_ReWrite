@@ -27,7 +27,7 @@ public class AllTopicsViewHolder extends BaseViewHolder {
     }
 
     @Override
-    public void setData(Object data) {
+    public void setData(Object data, int position) {
         TopicVO topicDatObj = (TopicVO) data;
         tvTopicTitle.setText(topicDatObj.getTopicName());
         tvTopicDescription.setText(topicDatObj.getTopicDesc());

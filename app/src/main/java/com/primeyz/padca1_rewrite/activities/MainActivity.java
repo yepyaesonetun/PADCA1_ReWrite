@@ -1,17 +1,17 @@
 package com.primeyz.padca1_rewrite.activities;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.primeyz.padca1_rewrite.R;
+import com.primeyz.padca1_rewrite.delegates.ProgramDelegate;
 import com.primeyz.padca1_rewrite.events.RestApiEvent;
 import com.primeyz.padca1_rewrite.fragments.EmptyFragment;
 import com.primeyz.padca1_rewrite.fragments.MeFragment;
@@ -21,10 +21,8 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener{
 
@@ -32,21 +30,14 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     public static final String TAG_ME = "Me";
     public static final String TAG_MORE = "More";
 
-    private BottomNavigationBar bottomNavigationBar;
-
     private ArrayList<String> fragmentTags;
     private Handler mHandler;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
-        setSupportActionBar(toolbar);
+    @BindView(R.id.activity_main_bn)
+    BottomNavigationBar bottomNavigationBar;
 
 //        TabLayout tabLayout = findViewById(R.id.sliding_tabs);
 //        ViewPager viewPager = findViewById(R.id.view_pager);
@@ -54,7 +45,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 //        SimpleFragmentPagerAdapter pagerAdapter = new SimpleFragmentPagerAdapter(this, getSupportFragmentManager());
 //        viewPager.setAdapter(pagerAdapter);
 //        tabLayout.setupWithViewPager(viewPager);
-        bindViews();
+
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void setUpContents(Bundle savedInstanceState) {
+        setSupportActionBar(toolbar);
         init();
         setupBottomNavBar();
         initLoad();
@@ -63,10 +62,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     private void init() {
         mHandler = new Handler();
         fragmentTags = new ArrayList<>();
-    }
-
-    private void bindViews() {
-        bottomNavigationBar = findViewById(R.id.activity_main_bn);
     }
 
     private void initLoad() {
@@ -155,4 +150,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
     public void onErrorInvokingAPI(RestApiEvent.ErrorInvokingAPIEvent event) {
         Snackbar.make(bottomNavigationBar, event.getErrorMsg(), Snackbar.LENGTH_INDEFINITE).show();
     }
+
+
 }

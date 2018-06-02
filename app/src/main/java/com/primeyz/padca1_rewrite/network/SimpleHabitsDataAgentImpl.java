@@ -61,7 +61,9 @@ public class SimpleHabitsDataAgentImpl implements SimpleHabitsDataAgent {
             @Override
             public void onResponse(Call<GetCurrentProgramsResponse> call, Response<GetCurrentProgramsResponse> response) {
                 GetCurrentProgramsResponse resultResponse = response.body();
-                if (resultResponse != null
+
+
+                if (response.isSuccessful() && resultResponse != null
                         && resultResponse.getCurrentProgram() != null) {
                     // Invoke EventBus
                     RestApiEvent.currentProgramDataLoadedEvent currentProgramDataLoadedEvent =

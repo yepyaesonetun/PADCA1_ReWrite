@@ -1,5 +1,6 @@
 package com.primeyz.padca1_rewrite.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,18 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.primeyz.padca1_rewrite.R;
+import com.primeyz.padca1_rewrite.activities.ProgramDetailActivity;
 import com.primeyz.padca1_rewrite.adapters.SeriesRVAdapter;
-import com.primeyz.padca1_rewrite.data.vo.BaseVO;
-import com.primeyz.padca1_rewrite.data.vo.CategoryVO;
-import com.primeyz.padca1_rewrite.data.vo.TopicVO;
+import com.primeyz.padca1_rewrite.delegates.ProgramDelegate;
 import com.primeyz.padca1_rewrite.events.RestApiEvent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,17 +29,12 @@ import butterknife.ButterKnife;
  * Created by yepyaesonetun on 5/19/18.
  **/
 
-public class SeriesFragment extends Fragment {
-
+public class SeriesFragment extends Fragment implements ProgramDelegate{
 
     @BindView(R.id.rv_main)
     RecyclerView rvMain;
 
-
     private SeriesRVAdapter adapter;
-    private List<BaseVO> objList = new ArrayList<>();
-    private List<CategoryVO> programVOList = new ArrayList<>();
-    private List<TopicVO> topicItemList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -53,7 +45,7 @@ public class SeriesFragment extends Fragment {
 
         rvMain = view.findViewById(R.id.rv_main);
         rvMain.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        adapter = new SeriesRVAdapter(getContext());
+        adapter = new SeriesRVAdapter(getContext(), this);
         rvMain.setAdapter(adapter);
 
         return view;
@@ -80,4 +72,13 @@ public class SeriesFragment extends Fragment {
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
+
+    @Override
+    public void onTapProgram(String id) {
+        Intent intent = ProgramDetailActivity.newIntent(getContext());
+        intent.putExtra("CATEGORY", "CATEGORY");
+        intent.putExtra("category_id", id);
+        startActivity(intent);
+    }
+
 }
