@@ -74,6 +74,7 @@ public class RestApiEvent {
         }
     }
 
+
     public static class DataReadyEvent {
         private List<BaseVO> baseVOList;
 

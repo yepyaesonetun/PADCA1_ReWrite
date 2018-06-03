@@ -58,8 +58,6 @@ public class CurrentProgramViewHolder extends BaseViewHolder<CurrentProgramVO> {
 
     @Override
     public void onClick(View v) {
-        Intent intent = ProgramDetailActivity.newIntent(itemView.getContext());
-        intent.putExtra("CATEGORY", "CURRENT_PROGRAM");
-        mContext.startActivity(intent);
+        mProgramDelegate.onTapCurrent();
     }
 }

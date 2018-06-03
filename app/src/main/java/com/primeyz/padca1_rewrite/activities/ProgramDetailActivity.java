@@ -45,9 +45,28 @@ public class ProgramDetailActivity extends BaseActivity {
 
     private SessionsRVAdapter allSessionsAdapter;
 
+    private boolean check = true;
+    private CurrentProgramVO currentProgramVO;
+    private ProgramVO programVO;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_pro_detail;
+    }
+
+    // using static factory pattern : Good Practice
+    public static Intent newIntent(Context context, String type, String id) {
+        Intent intent = new Intent(context, ProgramDetailActivity.class);
+        intent.putExtra("CATEGORY", type);
+        intent.putExtra("category_id", id);
+        return intent;
+    }
+
+    // for currentProgram
+    public static Intent newIntent(Context context, String type) {
+        Intent intent = new Intent(context, ProgramDetailActivity.class);
+        intent.putExtra("CATEGORY", type);
+        return intent;
     }
 
     @Override
@@ -64,14 +83,21 @@ public class ProgramDetailActivity extends BaseActivity {
         String programData = getIntent().getStringExtra("CATEGORY");
         String categoryId = getIntent().getStringExtra("category_id");
 
-        if(programData.equalsIgnoreCase("CURRENT_PROGRAM")){
-            CurrentProgramVO currentProgramVO = SeriesModal.getObjInstance().mCurrentProgramVO;
-            setUpCurrentData(currentProgramVO);
-        }else if(programData.equalsIgnoreCase("CATEGORY")){
-            ProgramVO programVO = SeriesModal.getObjInstance().getProgramId(categoryId);
-            setUpProgramData(programVO);
-        }
+        checkID(programData, categoryId);
 
+        if (check) setUpProgramData(programVO);
+        else setUpCurrentData(currentProgramVO);
+
+    }
+
+    private void checkID(String programData, String categoryId) {
+        check = programData.equalsIgnoreCase("CATEGORY");
+        SeriesModal model = SeriesModal.getObjInstance();
+        if (check && categoryId != null) {
+            programVO = model.getProgramVO(categoryId);
+        } else {
+            currentProgramVO = model.getCurrentProgramVO();
+        }
     }
 
     private void setUpProgramData(ProgramVO programVO) {
@@ -86,16 +112,10 @@ public class ProgramDetailActivity extends BaseActivity {
         allSessionsAdapter.appendNewData(currentProgramVO.getSessionVOList());
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_program,menu);
+        getMenuInflater().inflate(R.menu.menu_program, menu);
         return true;
-    }
-
-
-    public static Intent newIntent(Context context) {
-        return new Intent(context, ProgramDetailActivity.class);
     }
 
 
@@ -105,7 +125,7 @@ public class ProgramDetailActivity extends BaseActivity {
     }
 
     @OnClick(R.id.fab)
-    public void onClick(View view){
+    public void onClick(View view) {
         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }

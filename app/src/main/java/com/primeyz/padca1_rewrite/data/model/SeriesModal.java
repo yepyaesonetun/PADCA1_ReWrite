@@ -1,5 +1,7 @@
 package com.primeyz.padca1_rewrite.data.model;
 
+import android.util.Log;
+
 import com.primeyz.padca1_rewrite.data.vo.BaseVO;
 import com.primeyz.padca1_rewrite.data.vo.CategoryVO;
 import com.primeyz.padca1_rewrite.data.vo.CurrentProgramVO;
@@ -23,12 +25,12 @@ import static com.primeyz.padca1_rewrite.utils.AppConstants.ACCESS_TOKEN;
 
 public class SeriesModal {
     private static SeriesModal objInstance;
-    public static CurrentProgramVO mCurrentProgramVO = new CurrentProgramVO();
-    public static List<CategoryVO> mCategories;
+
+    private List<CategoryVO> categoryList;
+    List<BaseVO> list = new ArrayList<>();
+    private CurrentProgramVO currentProgramVO;
 
     private int mPageIndex = 1;
-
-    List<BaseVO> list = new ArrayList<>();
 
     private SeriesModal() {
         EventBus.getDefault().register(this);
@@ -41,6 +43,23 @@ public class SeriesModal {
         return objInstance;
     }
 
+    public void loadCurrentData(){
+        EventBus.getDefault().post(new RestApiEvent.currentProgramDataLoadedEvent(currentProgramVO));
+    }
+
+    public void loadProgramData(String programId){
+        ProgramVO programVO = new ProgramVO(programId);
+        for(CategoryVO vo:categoryList){
+            for(ProgramVO voprogram:vo.getPrograms()){
+                if(voprogram.getProgramId().equalsIgnoreCase(programId)){
+                    programVO =voprogram;
+                }
+            }
+        }
+        EventBus.getDefault().post(new RestApiEvent.ProgramEvent(programVO));
+
+    }
+
     public void startloadingSimpleHabit() {
         SimpleHabitsDataAgentImpl.getNewInstance().loadCurrentPrograms(ACCESS_TOKEN, mPageIndex);
     }
@@ -49,7 +68,6 @@ public class SeriesModal {
     public void onCurrentProgramDataLoaded(RestApiEvent.currentProgramDataLoadedEvent event) {
         list.add(event.getLoadedCurrentProgram());
         SimpleHabitsDataAgentImpl.getNewInstance().loadCategories(ACCESS_TOKEN, mPageIndex);
-        mCurrentProgramVO = event.getLoadedCurrentProgram();
     }
 
     @Subscribe
@@ -58,7 +76,7 @@ public class SeriesModal {
             list.add(categoryVO);
         }
         SimpleHabitsDataAgentImpl.getNewInstance().loadTopic(ACCESS_TOKEN, mPageIndex);
-        mCategories = event.getLoadCategories();
+        categoryList = event.getLoadCategories();
     }
 
     @Subscribe
@@ -69,16 +87,25 @@ public class SeriesModal {
         EventBus.getDefault().post(dataReadyEvent);
     }
 
+    public CurrentProgramVO getCurrentProgramVO(){
+        for (BaseVO baseVO: list){
+            if (baseVO instanceof CurrentProgramVO){
+                Log.e("CC", "getCurrentProgramVO: " + ((CurrentProgramVO) baseVO).getTitle() );
+                return (CurrentProgramVO) baseVO;
+            }
+        }
+        return null;
+    }
 
-    public ProgramVO getProgramId(String id) {
-        for (CategoryVO categoriesVO : mCategories) {
-            for (ProgramVO programsVO : categoriesVO.getPrograms()) {
-                if (programsVO.getProgramId().equalsIgnoreCase(id)) {
-                    return programsVO;
+    public ProgramVO getProgramVO(String id){
+        for (CategoryVO vo: categoryList){
+            for (ProgramVO programVO: vo.getPrograms()){
+                if (programVO.getProgramId().equalsIgnoreCase(id)){
+                    return programVO;
                 }
             }
         }
-        return new ProgramVO();
+        return null;
     }
 
 }

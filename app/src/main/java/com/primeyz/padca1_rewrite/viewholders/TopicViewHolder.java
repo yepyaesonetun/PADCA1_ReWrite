@@ -1,7 +1,5 @@
 package com.primeyz.padca1_rewrite.viewholders;
 
-import android.graphics.drawable.RippleDrawable;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,7 +18,7 @@ public class TopicViewHolder extends BaseViewHolder<ProgramVO>{
 	@BindView(R.id.tv_item_minute)
 	TextView tvItemMinute;
 
-	ProgramVO eveningDatObj;
+	ProgramVO programDataObj;
 	ProgramDelegate mDelegate;
 
 	public TopicViewHolder(View itemView, ProgramDelegate delegate) {
@@ -31,13 +29,13 @@ public class TopicViewHolder extends BaseViewHolder<ProgramVO>{
 
 	@Override
 	public void setData(ProgramVO data, int position) {
-		eveningDatObj = data;
+		programDataObj = data;
 		tvItemTitle.setText(data.getTitle());
 		tvItemMinute.setText(String.format("%d mins", data.getAverageLengths().get(0)));
 	}
 
 	@Override
 	public void onClick(View v) {
-		mDelegate.onTapProgram(eveningDatObj.programId);
+		mDelegate.onTapProgram(programDataObj.programId);
 	}
 }

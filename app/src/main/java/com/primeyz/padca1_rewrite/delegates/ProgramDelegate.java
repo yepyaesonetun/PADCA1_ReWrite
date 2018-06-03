@@ -5,5 +5,6 @@ package com.primeyz.padca1_rewrite.delegates;
  **/
 
 public interface ProgramDelegate {
+    void onTapCurrent();
     void onTapProgram(String id);
 }

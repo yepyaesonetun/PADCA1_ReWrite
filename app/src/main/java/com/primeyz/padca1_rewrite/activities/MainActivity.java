@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener{
+public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener,ProgramDelegate{
 
     public static final String TAG_MEDITATE = "Meditation";
     public static final String TAG_ME = "Me";
@@ -151,5 +151,15 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         Snackbar.make(bottomNavigationBar, event.getErrorMsg(), Snackbar.LENGTH_INDEFINITE).show();
     }
 
+    @Override
+    public void onTapCurrent() {
+        Intent intent = ProgramDetailActivity.newIntent(this,"CURRENT_PROGRAM");
+        startActivity(intent);
+    }
 
+    @Override
+    public void onTapProgram(String id) {
+        Intent intent = ProgramDetailActivity.newIntent(this, "CATEGORY",id);
+        startActivity(intent);
+    }
 }

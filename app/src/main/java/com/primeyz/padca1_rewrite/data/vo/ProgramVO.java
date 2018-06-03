@@ -26,7 +26,12 @@ public class ProgramVO{
 
     public List<SessionVO> sessions;
 
+    public ProgramVO(String programId) {
+        this.programId = programId;
+    }
 
+    public ProgramVO() {
+    }
 
     public String getProgramId() {
         return programId;
