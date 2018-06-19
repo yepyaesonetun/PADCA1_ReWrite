@@ -1,5 +1,10 @@
 package com.primeyz.padca1_rewrite.data.vo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -8,9 +13,11 @@ import java.util.List;
  * Created by yepyaesonetun on 5/25/18.
  **/
 
+@Entity(tableName = "Program")
 public class ProgramVO{
+    @PrimaryKey
     @SerializedName("program-id")
-    public String programId;
+    public @NonNull String programId;
 
     @SerializedName("title")
     public String title;
@@ -18,13 +25,25 @@ public class ProgramVO{
     @SerializedName("image")
     public String image;
 
+    @Ignore
     @SerializedName("average-lengths")
     public List<Integer> averageLengths;
 
     @SerializedName("description")
     public String description;
 
+    @Ignore
     public List<SessionVO> sessions;
+
+    private String sessionId;
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
 
     public ProgramVO(String programId) {
         this.programId = programId;

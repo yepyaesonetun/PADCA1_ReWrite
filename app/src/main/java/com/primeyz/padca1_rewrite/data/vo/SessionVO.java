@@ -1,15 +1,21 @@
 package com.primeyz.padca1_rewrite.data.vo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by yepyaesonetun on 5/25/18.
  **/
 
+@Entity(tableName = "Session")
 public class SessionVO implements BaseVO{
 
+    @PrimaryKey
     @SerializedName("session-id")
-    private String sessionId;
+    private @NonNull String sessionId;
     private String title;
     @SerializedName("length-in-seconds")
     private int lengthInSeconds;

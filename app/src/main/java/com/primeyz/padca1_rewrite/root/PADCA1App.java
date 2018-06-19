@@ -13,6 +13,6 @@ public class PADCA1App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        SeriesModal.getObjInstance().startloadingSimpleHabit();
+
     }
 }

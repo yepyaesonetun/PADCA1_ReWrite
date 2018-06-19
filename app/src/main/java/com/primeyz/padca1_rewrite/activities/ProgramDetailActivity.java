@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.primeyz.padca1_rewrite.R;
 import com.primeyz.padca1_rewrite.adapters.SessionsRVAdapter;
@@ -19,6 +20,8 @@ import com.primeyz.padca1_rewrite.data.model.SeriesModal;
 import com.primeyz.padca1_rewrite.data.vo.CurrentProgramVO;
 import com.primeyz.padca1_rewrite.data.vo.ProgramVO;
 import com.primeyz.padca1_rewrite.events.RestApiEvent;
+import com.primeyz.padca1_rewrite.mvp.presenters.ProgramDetailPresenter;
+import com.primeyz.padca1_rewrite.mvp.views.ProgramDetailView;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -26,7 +29,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class ProgramDetailActivity extends BaseActivity {
+public class ProgramDetailActivity extends BaseActivity implements ProgramDetailView {
 
     @BindView(R.id.nested_scrollView)
     NestedScrollView nestedScrollView;
@@ -45,9 +48,7 @@ public class ProgramDetailActivity extends BaseActivity {
 
     private SessionsRVAdapter allSessionsAdapter;
 
-    private boolean check = true;
-    private CurrentProgramVO currentProgramVO;
-    private ProgramVO programVO;
+    private ProgramDetailPresenter mPresenter;
 
     @Override
     protected int getLayoutRes() {
@@ -83,22 +84,40 @@ public class ProgramDetailActivity extends BaseActivity {
         String programData = getIntent().getStringExtra("CATEGORY");
         String categoryId = getIntent().getStringExtra("category_id");
 
-        checkID(programData, categoryId);
-
-        if (check) setUpProgramData(programVO);
-        else setUpCurrentData(currentProgramVO);
+        mPresenter = new ProgramDetailPresenter(this);
+        mPresenter.onFinishUISetUp(programData, categoryId);
 
     }
 
-    private void checkID(String programData, String categoryId) {
-        check = programData.equalsIgnoreCase("CATEGORY");
-        SeriesModal model = SeriesModal.getObjInstance();
-        if (check && categoryId != null) {
-            programVO = model.getProgramVO(categoryId);
-        } else {
-            currentProgramVO = model.getCurrentProgramVO();
-        }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_program, menu);
+        return true;
     }
+
+
+    @OnClick(R.id.fab)
+    public void onClick(View view) {
+        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
+    @Override
+    public void displayErrorMsg(String errorMsg) {
+        Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void displayCurrentProgramData(CurrentProgramVO currentProgramVO) {
+        setUpCurrentData(currentProgramVO);
+    }
+
+    @Override
+    public void displayProgramData(ProgramVO programVO) {
+        setUpProgramData(programVO);
+    }
+
 
     private void setUpProgramData(ProgramVO programVO) {
         collapsingToolbarLayout.setTitle(programVO.getTitle());
@@ -110,23 +129,5 @@ public class ProgramDetailActivity extends BaseActivity {
         collapsingToolbarLayout.setTitle(currentProgramVO.getTitle());
         textView_program_title.setText(currentProgramVO.getDescription());
         allSessionsAdapter.appendNewData(currentProgramVO.getSessionVOList());
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_program, menu);
-        return true;
-    }
-
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onErrorInvokingAPI(RestApiEvent.ErrorInvokingAPIEvent event) {
-        Snackbar.make(nestedScrollView, event.getErrorMsg(), Snackbar.LENGTH_INDEFINITE).show();
-    }
-
-    @OnClick(R.id.fab)
-    public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
     }
 }

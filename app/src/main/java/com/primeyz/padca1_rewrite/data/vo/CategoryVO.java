@@ -1,5 +1,11 @@
 package com.primeyz.padca1_rewrite.data.vo;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -8,11 +14,25 @@ import java.util.List;
  * Created by yepyaesonetun on 5/26/18.
  **/
 
+@Entity(tableName = "Categories")
 public class CategoryVO implements BaseVO{
+    @PrimaryKey
     @SerializedName("category-id")
-    private String categoryId;
+    private @NonNull String categoryId;
     private String title;
+    @Ignore
     private List<ProgramVO> programs;
+
+
+    private String programId;
+
+    public String getProgramId() {
+        return programId;
+    }
+
+    public void setProgramId(String programId) {
+        this.programId = programId;
+    }
 
     public String getCategoryId() {
         return categoryId;

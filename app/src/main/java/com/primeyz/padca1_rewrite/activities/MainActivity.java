@@ -11,6 +11,11 @@ import android.view.Menu;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.primeyz.padca1_rewrite.R;
+import com.primeyz.padca1_rewrite.data.model.SeriesModal;
+import com.primeyz.padca1_rewrite.data.vo.BaseVO;
+import com.primeyz.padca1_rewrite.data.vo.CategoryVO;
+import com.primeyz.padca1_rewrite.data.vo.CurrentProgramVO;
+import com.primeyz.padca1_rewrite.data.vo.TopicVO;
 import com.primeyz.padca1_rewrite.delegates.ProgramDelegate;
 import com.primeyz.padca1_rewrite.events.RestApiEvent;
 import com.primeyz.padca1_rewrite.fragments.EmptyFragment;
@@ -21,8 +26,12 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
 
 public class MainActivity extends BaseActivity implements BottomNavigationBar.OnTabSelectedListener,ProgramDelegate{
 
@@ -38,6 +47,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
 
     @BindView(R.id.activity_main_bn)
     BottomNavigationBar bottomNavigationBar;
+
 
 //        TabLayout tabLayout = findViewById(R.id.sliding_tabs);
 //        ViewPager viewPager = findViewById(R.id.view_pager);
@@ -57,6 +67,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationBar.On
         init();
         setupBottomNavBar();
         initLoad();
+
     }
 
     private void init() {

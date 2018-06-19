@@ -53,7 +53,7 @@ public class CurrentProgramViewHolder extends BaseViewHolder<CurrentProgramVO> {
         currentProgramVO = data;
         Glide.with(itemView.getContext()).load(R.drawable.sample).into(imgCurrentBg);
         tvCurrentPeriod.setText(data.getCurrentPeriod());
-        tvAverageLenth.setText(String.format("%d mins", data.getAverageLengths().get(0)));
+        tvAverageLenth.setText(String.format("%d mins", data.getAverageLengths()[0]));
     }
 
     @Override

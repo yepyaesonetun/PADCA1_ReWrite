@@ -1,6 +1,13 @@
 package com.primeyz.padca1_rewrite.data.vo;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
+import com.primeyz.padca1_rewrite.data.db.ProgramLengthTypeConverter;
 
 import java.util.List;
 
@@ -8,10 +15,12 @@ import java.util.List;
  * Created by yepyaesonetun on 5/26/18.
  **/
 
+@Entity(tableName = "CurrentProgram")
 public class CurrentProgramVO implements BaseVO{
 
+    @PrimaryKey
     @SerializedName("program-id")
-    private String programId;
+    private @NonNull String programId;
 
     @SerializedName("title")
     private String title;
@@ -22,9 +31,22 @@ public class CurrentProgramVO implements BaseVO{
     @SerializedName("description")
     private String description;
     @SerializedName("average-lengths")
-    private List<Integer> averageLengths;
+    @TypeConverters(ProgramLengthTypeConverter.class)
+    private int[] averageLengths;
+
     @SerializedName("sessions")
+    @Ignore
     private List<SessionVO> sessionVOList;
+
+    private String sessionId;
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
 
     public String getProgramId() {
         return programId;
@@ -66,11 +88,11 @@ public class CurrentProgramVO implements BaseVO{
         this.description = description;
     }
 
-    public List<Integer> getAverageLengths() {
+    public int[] getAverageLengths() {
         return averageLengths;
     }
 
-    public void setAverageLengths(List<Integer> averageLengths) {
+    public void setAverageLengths(int[] averageLengths) {
         this.averageLengths = averageLengths;
     }
 
