@@ -12,4 +12,8 @@ public interface SeriesListFragView extends BaseView{
 
     void displayData(List<BaseVO> baseVOList);
 
+    void launchCurrentProgram();
+
+    void launchProgram(String id);
+
 }

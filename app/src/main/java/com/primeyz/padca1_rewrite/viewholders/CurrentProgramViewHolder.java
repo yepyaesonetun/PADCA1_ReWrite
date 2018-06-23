@@ -42,7 +42,7 @@ public class CurrentProgramViewHolder extends BaseViewHolder<CurrentProgramVO> {
     public CurrentProgramViewHolder(View itemView, ProgramDelegate delegate) {
         super(itemView);
         mContext = itemView.getContext();
-        mProgramDelegate = delegate;
+        this.mProgramDelegate = delegate;
         ButterKnife.bind(this, itemView);
     }
 

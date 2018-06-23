@@ -1,6 +1,7 @@
 package com.primeyz.padca1_rewrite.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.primeyz.padca1_rewrite.R;
+import com.primeyz.padca1_rewrite.activities.ProgramDetailActivity;
 import com.primeyz.padca1_rewrite.adapters.SeriesRVAdapter;
 import com.primeyz.padca1_rewrite.data.model.SeriesModal;
 import com.primeyz.padca1_rewrite.data.vo.BaseVO;
@@ -51,8 +53,10 @@ public class SeriesFragment extends Fragment implements SeriesListFragView {
         ButterKnife.bind(this, view);
         mContext = getContext();
 
+
         mPresenter = new SeriesListFragPresenter(this);
         mPresenter.onCreate();
+        delegate = mPresenter;
 
         seriesModal = SeriesModal.getObjInstance();
         seriesModal.initDatabase(getContext());
@@ -99,11 +103,11 @@ public class SeriesFragment extends Fragment implements SeriesListFragView {
     }
 
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        delegate = (ProgramDelegate) context;
-    }
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        delegate = (ProgramDelegate) context;
+//    }
 
 
     @Override
@@ -114,5 +118,17 @@ public class SeriesFragment extends Fragment implements SeriesListFragView {
     @Override
     public void displayData(List<BaseVO> baseVOList) {
         adapter.setNewData(baseVOList);
+    }
+
+    @Override
+    public void launchCurrentProgram() {
+        Intent intent = ProgramDetailActivity.newIntent(getContext(), "CURRENT_PROGRAM");
+        startActivity(intent);
+    }
+
+    @Override
+    public void launchProgram(String id) {
+        Intent intent = ProgramDetailActivity.newIntent(getContext(), "CATEGORY", id);
+        startActivity(intent);
     }
 }

@@ -3,9 +3,11 @@ package com.primeyz.padca1_rewrite.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -27,9 +29,10 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ProgramDetailActivity extends BaseActivity implements ProgramDetailView {
+public class ProgramDetailActivity extends AppCompatActivity implements ProgramDetailView {
 
     @BindView(R.id.nested_scrollView)
     NestedScrollView nestedScrollView;
@@ -50,9 +53,13 @@ public class ProgramDetailActivity extends BaseActivity implements ProgramDetail
 
     private ProgramDetailPresenter mPresenter;
 
+
     @Override
-    protected int getLayoutRes() {
-        return R.layout.activity_pro_detail;
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pro_detail);
+        ButterKnife.bind(this, this);
+        setUpContents(savedInstanceState);
     }
 
     // using static factory pattern : Good Practice
@@ -70,7 +77,7 @@ public class ProgramDetailActivity extends BaseActivity implements ProgramDetail
         return intent;
     }
 
-    @Override
+
     protected void setUpContents(Bundle savedInstanceState) {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
