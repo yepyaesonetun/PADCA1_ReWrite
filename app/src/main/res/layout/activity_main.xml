@@ -41,20 +41,44 @@
             <!--android:layout_below="@id/sliding_tabs"/>-->
     <!--</RelativeLayout>-->
 
-    <FrameLayout
-        android:id="@+id/activity_main_fragmentContainer"
+    <!--<FrameLayout-->
+        <!--android:id="@+id/activity_main_fragmentContainer"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+
+    <!--<com.ashokvarma.bottomnavigation.BottomNavigationBar-->
+        <!--android:id="@+id/activity_main_bn"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--app:bnbActiveColor="@color/colorBottomNavigationActive"-->
+        <!--app:bnbBackgroundColor="@color/colorPrimary"-->
+        <!--app:bnbBackgroundStyle="background_style_static"-->
+        <!--app:bnbInactiveColor="@color/colorBottomNavigationInActive"-->
+        <!--app:bnbMode="mode_fixed" />-->
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <com.ashokvarma.bottomnavigation.BottomNavigationBar
-        android:id="@+id/activity_main_bn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:bnbActiveColor="@color/colorBottomNavigationActive"
-        app:bnbBackgroundColor="@color/colorPrimary"
-        app:bnbBackgroundStyle="background_style_static"
-        app:bnbInactiveColor="@color/colorBottomNavigationInActive"
-        app:bnbMode="mode_fixed" />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/navigation" />
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_gravity="bottom"
+            android:background="@color/colorPrimaryDark"
+            app:itemIconTint="@drawable/bottom_nav_icon_color_selector"
+            app:itemTextColor="@drawable/bottom_nav_icon_color_selector"
+            app:menu="@menu/navigation" />
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

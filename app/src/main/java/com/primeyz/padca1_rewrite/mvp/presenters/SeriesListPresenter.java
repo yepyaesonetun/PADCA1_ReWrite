@@ -5,7 +5,7 @@ import android.util.Log;
 import com.primeyz.padca1_rewrite.data.model.SeriesModal;
 import com.primeyz.padca1_rewrite.delegates.ProgramDelegate;
 import com.primeyz.padca1_rewrite.events.RestApiEvent;
-import com.primeyz.padca1_rewrite.mvp.views.SeriesListFragView;
+import com.primeyz.padca1_rewrite.mvp.views.SeriesListView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -15,11 +15,9 @@ import org.greenrobot.eventbus.ThreadMode;
  * Created by yepyaesonetun on 6/19/18.
  **/
 
-public class SeriesListFragPresenter extends BasePresenter<SeriesListFragView> implements ProgramDelegate{
+public class SeriesListPresenter extends BasePresenter<SeriesListView> implements ProgramDelegate{
 
-    private ProgramDelegate mDelegate;
-
-    public SeriesListFragPresenter(SeriesListFragView mView) {
+    public SeriesListPresenter(SeriesListView mView) {
         super(mView);
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
  * Created by yepyaesonetun on 6/19/18.
  **/
 
-public interface SeriesListFragView extends BaseView{
+public interface SeriesListView extends BaseView{
 
     void displayData(List<BaseVO> baseVOList);
 
